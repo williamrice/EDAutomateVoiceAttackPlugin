@@ -14,7 +14,7 @@ namespace EDAutomate
     public class WebDriverHandler
     {
         
-        public static void OpenInaraToCheckVoidOpalPrices(string lastKnownSystem)
+        public static void OpenInaraToCheckVoidOpalPrices(string lastKnownSystem, dynamic vaProxy)
         {
             
             
@@ -25,8 +25,9 @@ namespace EDAutomate
             {
                 driver = new ChromeDriver();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                vaProxy.WriteToLog($"{e.Message} : You probably don't have chromedriver installed", "red");
                 return;
             }
             

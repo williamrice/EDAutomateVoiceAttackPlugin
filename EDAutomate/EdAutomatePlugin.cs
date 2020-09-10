@@ -38,9 +38,9 @@ namespace EDAutomate
             try
             {
 
-               JournalWatcherHelper.Init(vaProxy);
+               JournalWatcherService.Init(vaProxy);
                 
-                vaProxy.WriteToLog($"Listening for journal changes at {JournalWatcherHelper.JournalPath}", "orange");
+                vaProxy.WriteToLog($"Listening for journal changes at {JournalWatcherService.JournalPath}", "orange");
             }
             catch (Exception e)
             {
@@ -57,8 +57,11 @@ namespace EDAutomate
             switch (vaProxy.Context)
             {
                 case "void opal sell search":
-                    vaProxy.WriteToLog($"DEBUG: Last known system: {JournalWatcherHelper.LastKnownSystem}", "orange");
-                    WebDriverHandler.OpenInaraToCheckVoidOpalPrices(JournalWatcherHelper.LastKnownSystem);
+                    vaProxy.WriteToLog($"DEBUG: Last known system: {JournalWatcherService.LastKnownSystem}", "orange");
+                    WebDriverHandler.OpenInaraToCheckVoidOpalPrices(JournalWatcherService.LastKnownSystem, vaProxy);
+                    break;
+                case "focus on elite window":
+                    FocusWindow.FocusOnEliteWindow(vaProxy);
                     break;
                 default:
                     break;

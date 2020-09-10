@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EDAutomate
 {
-    class JournalWatcherHelper
+    class JournalWatcherService
     {
         public static string JournalPath { get; set; } = System.IO.Path.Combine(Environment.GetEnvironmentVariable("USERPROFILE"), "Saved Games\\Frontier Developments\\Elite Dangerous");
         public static string LastKnownSystem { get; set; } = "Sol";
