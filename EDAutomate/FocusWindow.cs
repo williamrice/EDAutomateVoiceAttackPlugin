@@ -43,12 +43,12 @@ namespace EDAutomate
                 //vaProxy.WriteToLog($"DEBUG: Processe: {process.ProcessName}", "orange");
                 if (process.ProcessName == "EliteDangerous64")
                 {
-                    vaProxy.WriteToLog($"DEBUG: Process: {process.ProcessName}", "orange");
+                    //vaProxy.WriteToLog($"DEBUG: Process: {process.ProcessName}", "orange");
                     hWndElite = process.MainWindowHandle;
                 }
                 if (process.ProcessName == "VoiceAttack")
                 {
-                    vaProxy.WriteToLog($"DEBUG: Process: {process.ProcessName}", "orange");
+                    //vaProxy.WriteToLog($"DEBUG: Process: {process.ProcessName}", "orange");
                     hWndVA = process.MainWindowHandle;
                 }
             }
