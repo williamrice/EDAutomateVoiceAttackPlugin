@@ -6,11 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using EliteJournalReader;
 using EliteJournalReader.Events;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace EDAutomate
 {
     public class EdAutomatePlugin
     {
+        
         public static string VA_DisplayName()
         {
             return "Ed Automate Plugin - V1.0";
@@ -37,7 +40,7 @@ namespace EDAutomate
         {
             try
             {
-
+               
                JournalWatcherService.Init(vaProxy);
                 
                 vaProxy.WriteToLog($"Listening for journal changes at {JournalWatcherService.JournalPath}", "orange");
@@ -56,9 +59,9 @@ namespace EDAutomate
         {
             switch (vaProxy.Context)
             {
-                case "void opal sell search":
+                case "sell search":
                     vaProxy.WriteToLog($"DEBUG: Last known system: {JournalWatcherService.LastKnownSystem}", "orange");
-                    WebDriverHandler.OpenInaraToCheckVoidOpalPrices(JournalWatcherService.LastKnownSystem, vaProxy);
+                    WebDriverHandler.OpenInaraToCheckPrices(JournalWatcherService.LastKnownSystem,vaProxy);
                     break;
                 case "focus on elite window":
                     FocusWindow.FocusOnEliteWindow(vaProxy);

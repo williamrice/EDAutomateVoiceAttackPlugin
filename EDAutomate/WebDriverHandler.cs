@@ -13,31 +13,64 @@ namespace EDAutomate
 {
     public class WebDriverHandler
     {
-        
-        public static void OpenInaraToCheckVoidOpalPrices(string lastKnownSystem, dynamic vaProxy)
+        private static IWebDriver driver;
+
+        private static IWebDriver GetDriver()
         {
+            if (driver == null)
+            {
+               driver = new ChromeDriver();
+            }
+            return driver;
+        }
+        public static void OpenInaraToCheckPrices(string lastKnownSystem, dynamic vaProxy)
+        {
+            Commodities.Commodity _commodity = ParseCommoditiesVariable(vaProxy);
+
+
             
-            
-            
-            IWebDriver driver;
-            //TODO: Handle the error that is going to pop up if the user doesn't have the chrome driver installed. 
+            //TODO: make this cleaner and more reliable. 
             try
             {
-                driver = new ChromeDriver();
+                driver = GetDriver();
+                if (_commodity == Commodities.Commodity.ParseError)
+                {
+                    vaProxy.WriteToLog($"There was an error parsing the commodity type {(int)_commodity}", "red");
+                }
+                driver.Url = "https://inara.cz/galaxy-commodity/" + (int)_commodity;
+                var starSystemSearch = driver.FindElement(By.XPath("//*[@id=\"autocompletestar\"]"));
+
+                starSystemSearch.SendKeys(lastKnownSystem);
+                Thread.Sleep(2000);
+                var searchButton = driver.FindElement(By.XPath("/html/body/div[2]/div[1]/div[3]/div[1]/div[2]/form/div[3]/div/input"));
+                searchButton.Click();
             }
             catch (Exception e)
             {
-                vaProxy.WriteToLog($"{e.Message} : You probably don't have chromedriver installed", "red");
+                vaProxy.WriteToLog($"{e.Message} : Chromedriver Error, make sure its installed", "red");
+                vaProxy.WriteToLog($"{e.StackTrace}", "red");
                 return;
             }
-            
-            driver.Url = "https://inara.cz/galaxy-commodity/10250";
-            var starSystemSearch = driver.FindElement(By.XPath("//*[@id=\"autocompletestar\"]"));
 
-            starSystemSearch.SendKeys(lastKnownSystem);
-            Thread.Sleep(2000);
-            var searchButton = driver.FindElement(By.XPath("/html/body/div[2]/div[1]/div[3]/div[1]/div[2]/form/div[3]/div/input"));
-            searchButton.Click();
+           
+        }
+
+        private static Commodities.Commodity ParseCommoditiesVariable(dynamic vaProxy)
+        {
+            var comm = vaProxy.GetText("commoditiesVariable");
+
+            switch (comm)
+            {
+                case "void opal":
+                    return Commodities.Commodity.VoidOpal;
+                case "painite":
+                    return Commodities.Commodity.Painite;
+                case "ltd":
+                    return Commodities.Commodity.LTD;
+                default:
+                    return Commodities.Commodity.ParseError;
+                    
+            }
         }
 
     }
