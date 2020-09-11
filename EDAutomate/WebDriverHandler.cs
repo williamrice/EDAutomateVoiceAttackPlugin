@@ -8,6 +8,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using EliteJournalReader;
 using EliteJournalReader.Events;
+using System.Drawing.Text;
 
 namespace EDAutomate
 {
@@ -27,8 +28,6 @@ namespace EDAutomate
         {
             Commodities.Commodity _commodity = ParseCommoditiesVariable(vaProxy);
 
-
-            
             //TODO: make this cleaner and more reliable. 
             try
             {
@@ -47,13 +46,34 @@ namespace EDAutomate
             }
             catch (Exception e)
             {
-                vaProxy.WriteToLog($"{e.Message} : Chromedriver Error, make sure its installed", "red");
-                vaProxy.WriteToLog($"{e.StackTrace}", "red");
+                DisplayWebDriverError(vaProxy, e);
                 return;
             }
-
-           
         }
+
+        private static void DisplayWebDriverError(dynamic vaProxy, Exception e)
+        {
+            vaProxy.WriteToLog($"{e.Message} : Chromedriver Error, make sure its installed", "red");
+            vaProxy.WriteToLog($"{e.StackTrace}", "red");
+            return;
+        }
+
+        public static void OpenInaraToCheckEngineer(dynamic vaProxy)
+        {
+            
+            try
+            {
+                int? _engineer = vaProxy.GetInt("engineerVariable");
+                driver = GetDriver();
+                driver.Url = "https://inara.cz/galaxy-engineer/" + _engineer;
+            }
+            catch (Exception e)
+            {
+                DisplayWebDriverError(vaProxy, e);
+            }
+        }
+
+        
 
         private static Commodities.Commodity ParseCommoditiesVariable(dynamic vaProxy)
         {
@@ -69,9 +89,7 @@ namespace EDAutomate
                     return Commodities.Commodity.LTD;
                 default:
                     return Commodities.Commodity.ParseError;
-                    
             }
         }
-
     }
 }

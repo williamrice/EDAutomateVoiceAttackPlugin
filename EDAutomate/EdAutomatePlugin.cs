@@ -13,7 +13,6 @@ namespace EDAutomate
 {
     public class EdAutomatePlugin
     {
-        
         public static string VA_DisplayName()
         {
             return "Ed Automate Plugin - V1.0";
@@ -40,18 +39,13 @@ namespace EDAutomate
         {
             try
             {
-               
-               JournalWatcherService.Init(vaProxy);
-                
-                vaProxy.WriteToLog($"Listening for journal changes at {JournalWatcherService.JournalPath}", "orange");
+              JournalWatcherService.Init(vaProxy);
+              vaProxy.WriteToLog($"Listening for journal changes at {JournalWatcherService.JournalPath}", "orange");
             }
             catch (Exception e)
             {
-                
-                vaProxy.WriteToLog($"{e.StackTrace}", "orange");
-                vaProxy.WriteToLog($"{e.Message}", "orange");
-                
-
+              vaProxy.WriteToLog($"{e.StackTrace}", "orange");
+              vaProxy.WriteToLog($"{e.Message}", "orange");
             }
         }
 
@@ -62,6 +56,9 @@ namespace EDAutomate
                 case "sell search":
                     vaProxy.WriteToLog($"DEBUG: Last known system: {JournalWatcherService.LastKnownSystem}", "orange");
                     WebDriverHandler.OpenInaraToCheckPrices(JournalWatcherService.LastKnownSystem,vaProxy);
+                    break;
+                case "engineer search":
+                    WebDriverHandler.OpenInaraToCheckEngineer(vaProxy);
                     break;
                 case "focus on elite window":
                     FocusWindow.FocusOnEliteWindow(vaProxy);
@@ -75,7 +72,5 @@ namespace EDAutomate
         {
 
         }
-
-       
     }
 }

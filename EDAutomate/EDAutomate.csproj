@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Commodities.cs" />
     <Compile Include="EdAutomatePlugin.cs" />
+    <Compile Include="Engineers.cs" />
     <Compile Include="FocusWindow.cs" />
     <Compile Include="JournalWatcherService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
