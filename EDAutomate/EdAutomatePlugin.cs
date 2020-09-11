@@ -53,7 +53,7 @@ namespace EDAutomate
         {
             switch (vaProxy.Context)
             {
-                case "sell search":
+                case "commodity search":
                     vaProxy.WriteToLog($"DEBUG: Last known system: {JournalWatcherService.LastKnownSystem}", "orange");
                     WebDriverHandler.OpenInaraToCheckPrices(JournalWatcherService.LastKnownSystem,vaProxy);
                     break;

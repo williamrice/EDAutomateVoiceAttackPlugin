@@ -6,6 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DED52F92-0881-4FAE-BBD8-2321D909FAD2}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <LangVersion>8.0</LangVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EDAutomate</RootNamespace>
     <AssemblyName>EDAutomatePlugin</AssemblyName>
@@ -18,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Program Files %28x86%29\Steam\steamapps\common\VoiceAttack\Apps\ED Automate\</OutputPath>
+    <OutputPath>E:\Program Files %28x86%29\Steam\steamapps\common\VoiceAttack\Apps\EDAutomatePlugin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

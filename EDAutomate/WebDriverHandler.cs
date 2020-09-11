@@ -14,10 +14,13 @@ namespace EDAutomate
 {
     public class WebDriverHandler
     {
-        private static IWebDriver driver;
+        private static IWebDriver driver = null;
+
+        
 
         private static IWebDriver GetDriver()
         {
+            
             if (driver == null)
             {
                driver = new ChromeDriver();
@@ -27,26 +30,48 @@ namespace EDAutomate
         public static void OpenInaraToCheckPrices(string lastKnownSystem, dynamic vaProxy)
         {
             Commodities.Commodity _commodity = ParseCommoditiesVariable(vaProxy);
+            vaProxy.WriteToLog($"{_commodity}", "pink");
 
-            //TODO: make this cleaner and more reliable. 
+             
             try
             {
-                driver = GetDriver();
-                if (_commodity == Commodities.Commodity.ParseError)
+                try
                 {
-                    vaProxy.WriteToLog($"There was an error parsing the commodity type {(int)_commodity}", "red");
+                    _ = driver.Url;
                 }
-                driver.Url = "https://inara.cz/galaxy-commodity/" + (int)_commodity;
+                catch (Exception e)
+                {
+                driver = null;
+                }
+                
+                driver = GetDriver();
+
+
+                try
+                {
+                    driver.Url = "https://inara.cz/galaxy-commodity/" + (int)_commodity;
+                }
+                catch (Exception e)
+                {
+                    vaProxy.WriteToLog($"ERROR: Could not connect to the webdriver, Check your network connection and try again", "red");
+                }
                 var starSystemSearch = driver.FindElement(By.XPath("//*[@id=\"autocompletestar\"]"));
 
                 starSystemSearch.SendKeys(lastKnownSystem);
                 Thread.Sleep(2000);
-                var searchButton = driver.FindElement(By.XPath("/html/body/div[2]/div[1]/div[3]/div[1]/div[2]/form/div[3]/div/input"));
-                searchButton.Click();
+                starSystemSearch.SendKeys(Keys.Enter);
+
+                if (vaProxy.GetText("buyorsell") == "buy")
+                {
+                    var exports = driver.FindElement(By.XPath("//*[@id=\"ui-id-9\"]"));
+                    exports.Click();
+                }
+
+
             }
             catch (Exception e)
             {
-                DisplayWebDriverError(vaProxy, e);
+                //DisplayWebDriverError(vaProxy, e);
                 return;
             }
         }
@@ -60,8 +85,7 @@ namespace EDAutomate
 
         public static void OpenInaraToCheckEngineer(dynamic vaProxy)
         {
-            
-            try
+           try
             {
                 int? _engineer = vaProxy.GetInt("engineerVariable");
                 driver = GetDriver();
@@ -73,23 +97,29 @@ namespace EDAutomate
             }
         }
 
-        
+
 
         private static Commodities.Commodity ParseCommoditiesVariable(dynamic vaProxy)
         {
-            var comm = vaProxy.GetText("commoditiesVariable");
-
-            switch (comm)
+            Commodities.Commodity result;
+            string incoming = vaProxy.GetText("commodityName");
+            string comm = incoming.Replace(" ", "").Replace("-", "");
+            vaProxy.WriteToLog($"{comm} from inside parse", "purple");
+            if (comm == null)
             {
-                case "void opal":
-                    return Commodities.Commodity.VoidOpal;
-                case "painite":
-                    return Commodities.Commodity.Painite;
-                case "ltd":
-                    return Commodities.Commodity.LTD;
-                default:
-                    return Commodities.Commodity.ParseError;
+                return Commodities.Commodity.VoidOpals;
             }
+            var success = Enum.TryParse<Commodities.Commodity>(comm,true, out result);
+            if (success)
+            {
+                return result;
+            }
+            else
+            {
+                return Commodities.Commodity.VoidOpals;
+            }
+            
+
         }
     }
 }
