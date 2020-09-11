@@ -2,6 +2,8 @@
 ## This plugin is under development and is in a very alpha state as new features are being added
 A voice attack plug in to automate external elite programs such as pulling up inara directly to commodity, engineer, or module information. It is designed for use with OVR Drop in VR so you can open the external windows by voice command and never leave the headset or type anything.
 
+***
+
 # Installation
 <ul>
 <li>You must have chromedriver installed and set to a PATH variable. The best way to do this is to install a popular windows package manager Chocolatey on your system as it will automatically set the PATH variable.</li>
@@ -55,6 +57,11 @@ A voice attack plug in to automate external elite programs such as pulling up in
 ### Current OVR Drop commmands
 - <strong>Show overlay</strong> - This will show the overlay in your VR headset
 - <strong>Hide overlay</strong> - This will hide the overlay in your VR headset and refocus on the Elite Dangerous game automatically
+
+***
+
+## Usage Tips
++ Once a browser window is spawned, it is best to leave it open in the background for best results. If you close the browser tab or the chromewebdriver, you will receive a slight delay on the next browser automation command. This is due to the timeout that the chromewebdriver has. I've yet to find a solution for this and neither has the internet. The webdriver has no way of knowing that the window was exited. I will only allow one instance of the webdriver to be instantiated for obvious performance reasons. Your best bet is to leave the opened webbrowser and chromewebdriver running in the background as you play. 
 
 ***
 
