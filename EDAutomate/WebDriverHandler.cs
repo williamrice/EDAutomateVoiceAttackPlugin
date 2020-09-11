@@ -105,21 +105,9 @@ namespace EDAutomate
             string incoming = vaProxy.GetText("commodityName");
             string comm = incoming.Replace(" ", "").Replace("-", "");
             vaProxy.WriteToLog($"{comm} from inside parse", "purple");
-            if (comm == null)
-            {
-                return Commodities.Commodity.VoidOpals;
-            }
-            var success = Enum.TryParse<Commodities.Commodity>(comm,true, out result);
-            if (success)
-            {
-                return result;
-            }
-            else
-            {
-                return Commodities.Commodity.VoidOpals;
-            }
             
-
+            _ = Enum.TryParse<Commodities.Commodity>(comm,true, out result);
+            return result;
         }
     }
 }
