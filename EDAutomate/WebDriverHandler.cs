@@ -39,7 +39,7 @@ namespace EDAutomate
                 {
                     _ = driver.Url;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                 driver = null;
                 }
