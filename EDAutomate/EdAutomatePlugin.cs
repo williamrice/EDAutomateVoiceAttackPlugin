@@ -15,7 +15,7 @@ namespace EDAutomate
     {
         public static string VA_DisplayName()
         {
-            return "Ed Automate Plugin - V1.0";
+            return "Ed Automate Plugin - V0.1alpha";
         }
 
         public static string VA_DisplayInfo()
