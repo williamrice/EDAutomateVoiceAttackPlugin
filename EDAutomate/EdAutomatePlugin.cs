@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EliteJournalReader;
-using EliteJournalReader.Events;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace EDAutomate
 {
     public class EdAutomatePlugin
     {
+
+        public static readonly string COMMODITY_URL = "https://inara.cz/galaxy-commodity/";
+        public static readonly string ENGINEER_URL = "https://inara.cz/galaxy-engineer/";
+        public static readonly string COMMODITY_VARIABLE = "commodityName";
+        public static readonly string ENGINEER_VARIABLE = "engineerVariable";
+
         public static string VA_DisplayName()
         {
-            return "Ed Automate Plugin - V0.1alpha";
+            return "Ed Automate Plugin - V0.2alpha";
         }
 
         public static string VA_DisplayInfo()
@@ -39,13 +36,13 @@ namespace EDAutomate
         {
             try
             {
-              JournalWatcherService.Init(vaProxy);
-              vaProxy.WriteToLog($"Listening for journal changes at {JournalWatcherService.JournalPath}", "orange");
+                JournalWatcherService.Init(vaProxy);
+                vaProxy.WriteToLog($"Listening for journal changes at {JournalWatcherService.JournalPath}", "orange");
             }
             catch (Exception e)
             {
-              vaProxy.WriteToLog($"{e.StackTrace}", "orange");
-              vaProxy.WriteToLog($"{e.Message}", "orange");
+                vaProxy.WriteToLog($"{e.StackTrace}", "orange");
+                vaProxy.WriteToLog($"{e.Message}", "orange");
             }
         }
 
@@ -55,10 +52,10 @@ namespace EDAutomate
             {
                 case "commodity search":
                     vaProxy.WriteToLog($"DEBUG: Last known system: {JournalWatcherService.LastKnownSystem}", "orange");
-                    WebDriverHandler.OpenInaraToCheckPrices(JournalWatcherService.LastKnownSystem,vaProxy);
+                    WebDriverHandler.OpenInara<Commodities.Commodity>(vaProxy, COMMODITY_URL, COMMODITY_VARIABLE, JournalWatcherService.LastKnownSystem);
                     break;
                 case "engineer search":
-                    WebDriverHandler.OpenInaraToCheckEngineer(vaProxy);
+                    WebDriverHandler.OpenInara<Engineers.Engineer>(vaProxy, ENGINEER_URL, ENGINEER_VARIABLE);
                     break;
                 case "focus on elite window":
                     FocusWindow.FocusOnEliteWindow(vaProxy);

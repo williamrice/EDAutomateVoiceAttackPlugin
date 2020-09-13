@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EDAutomate
+﻿namespace EDAutomate
 {
     class Engineers
     {
         public enum Engineer
         {
+            None = 0,
             FelicityFarseer = 1,
             ElviraMartuuk = 2,
             ProfessorPalin = 3,
             TheDweller = 4,
             LizRyder = 5,
-            TodMcquinn = 6,
+            ToddMcquinn = 6,
+            ToddTheBlasterMcQuinn = 6,
+            ToddTheBlaster = 6,
             MarcoQwent = 7,
             SeleneJean = 8,
             ZacariahNemo = 9,

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EDAutomate
 {
@@ -33,7 +29,7 @@ namespace EDAutomate
 
         public static void FocusOnEliteWindow(dynamic vaProxy)
         {
-            
+
             IntPtr hWndElite = IntPtr.Zero;
             IntPtr hWndVA = IntPtr.Zero;
             Process[] processes = Process.GetProcesses();
@@ -52,7 +48,7 @@ namespace EDAutomate
                     hWndVA = process.MainWindowHandle;
                 }
             }
-            if(hWndElite != IntPtr.Zero || hWndVA != IntPtr.Zero) 
+            if (hWndElite != IntPtr.Zero || hWndVA != IntPtr.Zero)
             {
                 uint foreThread = GetWindowThreadProcessId(GetForegroundWindow(), IntPtr.Zero);
 
@@ -84,7 +80,7 @@ namespace EDAutomate
 
                 }
             }
-            
+
         }
 
 

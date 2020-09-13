@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EDAutomate
+﻿namespace EDAutomate
 {
     class Commodities
     {
         public enum Commodity
         {
+            None = 0,
             AgronomicTreatment = 10268,
             Explosives = 3,
             HydrogenFuel = 4,

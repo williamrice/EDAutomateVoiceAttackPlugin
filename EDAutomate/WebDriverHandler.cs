@@ -1,38 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using EliteJournalReader;
-using EliteJournalReader.Events;
-using System.Drawing.Text;
+using System;
+using System.Threading;
 
 namespace EDAutomate
 {
     public class WebDriverHandler
     {
+
+
         private static IWebDriver driver = null;
 
-        
+
 
         private static IWebDriver GetDriver()
         {
-            
+
             if (driver == null)
             {
-               driver = new ChromeDriver();
+                driver = new ChromeDriver();
             }
             return driver;
         }
-        public static void OpenInaraToCheckPrices(string lastKnownSystem, dynamic vaProxy)
+        public static void OpenInara<T>(dynamic vaProxy, string url, string vaVarName, string lastKnownSystem = "sol") where T : Enum
         {
-            Commodities.Commodity _commodity = ParseCommoditiesVariable(vaProxy);
-            vaProxy.WriteToLog($"{_commodity}", "pink");
+            vaProxy.WriteToLog($"failed here", "orange");
+            Enum? _addUrlEnd = EnumParser.ParseStringToEnum<T>(vaProxy, vaVarName, typeof(T));
 
-             
+            if (_addUrlEnd == null)
+            {
+                vaProxy.WriteToLog($"An error occurred. Parsed value is null", "red");
+                return;
+            }
+
+
+
+
+            //vaProxy.WriteToLog($"{_addUrlEnd}", "pink");
+
             try
             {
                 try
@@ -41,33 +46,36 @@ namespace EDAutomate
                 }
                 catch (Exception)
                 {
-                driver = null;
+                    driver = null;
                 }
-                
+
                 driver = GetDriver();
 
 
                 try
                 {
-                    driver.Url = "https://inara.cz/galaxy-commodity/" + (int)_commodity;
+                    driver.Url = url + Convert.ToInt32(_addUrlEnd);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     vaProxy.WriteToLog($"ERROR: Could not connect to the webdriver, Check your network connection and try again", "red");
                 }
-                var starSystemSearch = driver.FindElement(By.XPath("//*[@id=\"autocompletestar\"]"));
-
-                starSystemSearch.SendKeys(lastKnownSystem);
-                Thread.Sleep(2000);
-                starSystemSearch.SendKeys(Keys.Enter);
-
-                if (vaProxy.GetText("buyorsell") == "buy")
+                if (typeof(T) == typeof(Commodities.Commodity))
                 {
-                    var exports = driver.FindElement(By.XPath("//*[@id=\"ui-id-9\"]"));
-                    exports.Click();
+                    var starSystemSearch = driver.FindElement(By.XPath("//*[@id=\"autocompletestar\"]"));
+
+                    starSystemSearch.SendKeys(lastKnownSystem);
+                    Thread.Sleep(2000);
+                    starSystemSearch.SendKeys(Keys.Enter);
+
+                    if (vaProxy.GetText("buyorsell") == "buy")
+                    {
+                        var exports = driver.FindElement(By.XPath("//*[@id=\"ui-id-9\"]"));
+                        exports.Click();
+                    }
                 }
 
-
+                vaProxy.SetBoolean("webDriverSuccess", true);
             }
             catch (Exception e)
             {
@@ -83,31 +91,5 @@ namespace EDAutomate
             return;
         }
 
-        public static void OpenInaraToCheckEngineer(dynamic vaProxy)
-        {
-           try
-            {
-                int? _engineer = vaProxy.GetInt("engineerVariable");
-                driver = GetDriver();
-                driver.Url = "https://inara.cz/galaxy-engineer/" + _engineer;
-            }
-            catch (Exception e)
-            {
-                DisplayWebDriverError(vaProxy, e);
-            }
-        }
-
-
-
-        private static Commodities.Commodity ParseCommoditiesVariable(dynamic vaProxy)
-        {
-            Commodities.Commodity result;
-            string incoming = vaProxy.GetText("commodityName");
-            string comm = incoming.Replace(" ", "").Replace("-", "");
-            vaProxy.WriteToLog($"{comm} from inside parse", "purple");
-            
-            _ = Enum.TryParse<Commodities.Commodity>(comm,true, out result);
-            return result;
-        }
     }
 }

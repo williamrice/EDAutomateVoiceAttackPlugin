@@ -59,6 +59,7 @@
     <Compile Include="FocusWindow.cs" />
     <Compile Include="JournalWatcherService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EnumParser.cs" />
     <Compile Include="WebDriverHandler.cs" />
   </ItemGroup>
   <ItemGroup>
