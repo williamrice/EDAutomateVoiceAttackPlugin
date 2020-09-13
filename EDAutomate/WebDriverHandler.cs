@@ -8,23 +8,22 @@ namespace EDAutomate
     public class WebDriverHandler
     {
 
-
+        private static string ChromeDriverPath { get; } = @".\Apps\ED Automate\drivers\";
+        
         private static IWebDriver driver = null;
-
-
 
         private static IWebDriver GetDriver()
         {
 
             if (driver == null)
             {
-                driver = new ChromeDriver();
+              driver = new ChromeDriver(ChromeDriverPath);
             }
             return driver;
         }
         public static void OpenInara<T>(dynamic vaProxy, string url, string vaVarName, string lastKnownSystem = "sol") where T : Enum
         {
-            vaProxy.WriteToLog($"failed here", "orange");
+            vaProxy.WriteToLog($"{ChromeDriverPath}", "orange");
             Enum? _addUrlEnd = EnumParser.ParseStringToEnum<T>(vaProxy, vaVarName, typeof(T));
 
             if (_addUrlEnd == null)
@@ -32,11 +31,6 @@ namespace EDAutomate
                 vaProxy.WriteToLog($"An error occurred. Parsed value is null", "red");
                 return;
             }
-
-
-
-
-            //vaProxy.WriteToLog($"{_addUrlEnd}", "pink");
 
             try
             {
@@ -50,7 +44,7 @@ namespace EDAutomate
                 }
 
                 driver = GetDriver();
-
+                
 
                 try
                 {
@@ -79,14 +73,14 @@ namespace EDAutomate
             }
             catch (Exception e)
             {
-                //DisplayWebDriverError(vaProxy, e);
+                DisplayWebDriverError(vaProxy, e);
                 return;
             }
         }
 
         private static void DisplayWebDriverError(dynamic vaProxy, Exception e)
         {
-            vaProxy.WriteToLog($"{e.Message} : Chromedriver Error, make sure its installed", "red");
+            vaProxy.WriteToLog($"{e.Message} : An error occurred in the web driver", "red");
             vaProxy.WriteToLog($"{e.StackTrace}", "red");
             return;
         }
