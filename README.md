@@ -2,6 +2,8 @@
 ## This plugin is under development and is in a very alpha state as new features are being added
 A voice attack plug in to automate external elite programs such as pulling up inara directly to commodity, engineer, or module information. It is designed for use with OVR Drop in VR so you can open the external windows by voice command and never leave the headset or type anything.
 
+<strong>Download the latest release here -> <strong/> https://github.com/lawen4cer/EDAutomateVoiceAttackPlugin/releases
+
 ***
 
 # Installation
