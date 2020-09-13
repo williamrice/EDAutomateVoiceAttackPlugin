@@ -12,7 +12,7 @@ namespace EDAutomate
 
         public static string VA_DisplayName()
         {
-            return "Ed Automate Plugin - V0.2alpha";
+            return "Ed Automate Plugin - V0.0.0.2alpha";
         }
 
         public static string VA_DisplayInfo()
@@ -34,6 +34,8 @@ namespace EDAutomate
 
         public static void VA_Init1(dynamic vaProxy)
         {
+            AutoUpdate.CheckForUpdates(vaProxy);
+
             try
             {
                 JournalWatcherService.Init(vaProxy);
