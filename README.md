@@ -26,5 +26,6 @@ Bug reports should be posted at https://github.com/lawen4cer/EDAutomateVoiceAtta
 This application is using the following libraries:
 - Selenium - https://www.toolsqa.com/
 - Elite Dangerous Journal - https://github.com/MagicMau/EliteJournalReader
+- AutoUpdater.Net - https://github.com/ravibpatel/AutoUpdater.NET
 
 ##### Shoutout to TonyZ for his desire for literally everything to be voiced controlled or automated as an inspiration for this project. TonyZ has been providing voluntary support for HCS Voicepacks and Voice Attack for many years. He is often found in their discords, offering support for first time users. Reach out to TonyZ via discord at TonyZ#6300 for any help you might need with configuring your Voice Attack to work at its full potential with Elite Dangerous. o7
