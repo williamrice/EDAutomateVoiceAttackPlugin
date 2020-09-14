@@ -7,8 +7,10 @@ namespace EDAutomate
 
         public static readonly string COMMODITY_URL = "https://inara.cz/galaxy-commodity/";
         public static readonly string ENGINEER_URL = "https://inara.cz/galaxy-engineer/";
+        public static readonly string MODULE_URL = "https://eddb.io/station";
         public static readonly string COMMODITY_VARIABLE = "commodityName";
         public static readonly string ENGINEER_VARIABLE = "engineerVariable";
+        public static readonly string MODULE_VARIABLE = "moduleVariable";
 
         public static string VA_DisplayName()
         {
@@ -59,8 +61,8 @@ namespace EDAutomate
                 case "engineer search":
                     WebDriverHandler.OpenInara<Engineers.Engineer>(vaProxy, ENGINEER_URL, ENGINEER_VARIABLE);
                     break;
-                case "focus on elite window":
-                    FocusWindow.FocusOnEliteWindow(vaProxy);
+                case "module search":
+                    WebDriverHandler.OpenEddb(vaProxy, MODULE_URL, MODULE_VARIABLE, JournalWatcherService.LastKnownSystem);
                     break;
                 default:
                     break;
