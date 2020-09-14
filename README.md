@@ -7,7 +7,8 @@ A voice attack plug in to automate external elite programs such as pulling up in
 ***
 
 # Installation
-See the InstallInstructions(READ ME).pdf included in the download
+Unzip to your Voice Attack/Apps folder. 
+See the Install Instructions(READ ME).pdf included in the download if you need more help installing.
 
 ## Current commands
 See the user guide included in the download
@@ -26,5 +27,6 @@ Bug reports should be posted at https://github.com/lawen4cer/EDAutomateVoiceAtta
 This application is using the following libraries:
 - Selenium - https://www.toolsqa.com/
 - Elite Dangerous Journal - https://github.com/MagicMau/EliteJournalReader
+- AutoUpdater.Net - https://github.com/ravibpatel/AutoUpdater.NET
 
 ##### Shoutout to TonyZ for his desire for literally everything to be voiced controlled or automated as an inspiration for this project. TonyZ has been providing voluntary support for HCS Voicepacks and Voice Attack for many years. He is often found in their discords, offering support for first time users. Reach out to TonyZ via discord at TonyZ#6300 for any help you might need with configuring your Voice Attack to work at its full potential with Elite Dangerous. o7
