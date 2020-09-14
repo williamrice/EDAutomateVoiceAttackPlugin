@@ -7,7 +7,8 @@ A voice attack plug in to automate external elite programs such as pulling up in
 ***
 
 # Installation
-See the InstallInstructions(READ ME).pdf included in the download
+Unzip to your Voice Attack/Apps folder. 
+See the Install Instructions(READ ME).pdf included in the download if you need more help installing.
 
 ## Current commands
 See the user guide included in the download
