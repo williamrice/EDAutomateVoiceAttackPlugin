@@ -130,9 +130,23 @@ namespace EDAutomate
 
 
                     input.SendKeys(moduleName);
+
+                    
+
                     Thread.Sleep(2000);
                     input.SendKeys(Keys.Enter);
 
+                    try
+                    {
+                        var cookieButton = driver.FindElement(By.XPath("/html/body/div[1]/div/a[1]"));
+                        cookieButton.Click();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    Thread.Sleep(2000);
                    
                     try
                     {
@@ -143,9 +157,9 @@ namespace EDAutomate
                     {
 
                     }
-                    
-                    
 
+
+                    Thread.Sleep(2000);
                     wait.Until(ExpectedConditions.ElementExists(By.XPath(REFERENCESYSTEMXPATH)));
                     var refInput = driver.FindElement(By.XPath(REFERENCESYSTEMXPATH)); 
                     refInput.SendKeys(lastKnownSystem);
@@ -156,15 +170,7 @@ namespace EDAutomate
                     Thread.Sleep(1000);
 
 
-                    try
-                    {
-                        var cookieButton = driver.FindElement(By.XPath("/html/body/div[1]/div/a[1]"));
-                        cookieButton.Click();
-                    }
-                    catch(Exception)
-                    {
-
-                    }
+                    
                     
 
                     var searchButton = driver.FindElement(By.XPath("//*[@id=\"btFindStations\"]"));
