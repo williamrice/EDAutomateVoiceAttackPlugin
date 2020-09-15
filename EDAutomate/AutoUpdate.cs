@@ -45,7 +45,7 @@ namespace EDAutomate
         private static void AutoUpdater_ApplicationExitEvent()
         {
          
-            MessageBox.Show("Voice attack will now restart to finish updating Ed Automate", "Restart Required", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            MessageBox.Show("Voice attack will now restart to finish updating Ed Automate. This release includes profile changes! Make sure that you delete the old ED Automate Profile and re-import the new profile found in the Voice Attack Profile folder in the plugin after the restart", "Restart Required", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             Thread.Sleep(1000);
             Application.OpenForms["frmMain"].Close();
 
