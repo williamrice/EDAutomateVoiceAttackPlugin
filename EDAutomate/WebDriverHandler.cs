@@ -27,7 +27,7 @@ namespace EDAutomate
         }
         public static void OpenInara<T>(dynamic vaProxy, string url, string vaVarName, string lastKnownSystem = "sol") where T : Enum
         {
-            vaProxy.WriteToLog($"{vaProxy.GetText(vaVarName)}", "orange");
+            //vaProxy.WriteToLog($"{vaProxy.GetText(vaVarName)}", "orange");
 
 
 
@@ -188,6 +188,21 @@ namespace EDAutomate
                 DisplayWebDriverError(vaProxy, e);
                 return;
             }
+        }
+
+        public static void OpenMinerTool(dynamic vaProxy, string lastKnownSystem)
+        {
+            try
+            {
+                _ = driver.Url;
+            }
+            catch (Exception)
+            {
+                driver = null;
+            }
+
+            driver = GetDriver();
+            MiningSearch.SearchForMiningData(driver, vaProxy, lastKnownSystem);
         }
 
         private static void DisplayWebDriverError(dynamic vaProxy, Exception e)

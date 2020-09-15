@@ -25,8 +25,8 @@ namespace EDAutomate
             AutoUpdater.ShowSkipButton = false;
             AutoUpdater.ShowRemindLaterButton = false;
             AutoUpdater.Mandatory = true;
-           
-            
+
+            AutoUpdater.ApplicationExitEvent += AutoUpdater_ApplicationExitEvent;
             
 
             
@@ -35,6 +35,11 @@ namespace EDAutomate
 
             AutoUpdater.Start("https://raw.githubusercontent.com/lawen4cer/EDAutomateVoiceAttackPlugin/update/update.xml", myAssembly);
 
+        }
+
+        private static void AutoUpdater_ApplicationExitEvent()
+        {
+            Environment.Exit(0);
         }
     }
 }
