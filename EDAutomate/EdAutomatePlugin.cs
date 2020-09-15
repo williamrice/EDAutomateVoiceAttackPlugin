@@ -14,7 +14,7 @@ namespace EDAutomate
 
         public static string VA_DisplayName()
         {
-            return "Ed Automate Plugin - V0.0.0.4alpha";
+            return "Ed Automate Plugin - V0.0.0.5alpha";
         }
 
         public static string VA_DisplayInfo()
@@ -63,6 +63,9 @@ namespace EDAutomate
                     break;
                 case "module search":
                     WebDriverHandler.OpenEddb(vaProxy, MODULE_URL, MODULE_VARIABLE, JournalWatcherService.LastKnownSystem);
+                    break;
+                case "mining search":
+                    WebDriverHandler.OpenMinerTool(vaProxy, JournalWatcherService.LastKnownSystem);
                     break;
                 default:
                     break;
