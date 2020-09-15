@@ -29,7 +29,6 @@ namespace EDAutomate
                 //vaProxy.WriteToLog($"{URL} - {driver.GetHashCode()}", "red");
                 driver.Url = URL;
                 Thread.Sleep(1200);
-                vaProxy.WriteToLog($"{URL} - {driver.GetHashCode()}", "red");
                 var refInput = driver.FindElement(By.XPath(REFSYSTEMXPATH));
                 Thread.Sleep(500);
                 refInput.SendKeys(lastKnownSystem);
