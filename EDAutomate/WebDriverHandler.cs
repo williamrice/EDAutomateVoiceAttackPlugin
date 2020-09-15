@@ -64,7 +64,37 @@ namespace EDAutomate
 
                 if (typeof(T) == typeof(Modules.Module))
                 {
-                    var ModuleSpan = driver.FindElement(By.Name("span"));
+                    try
+                    {
+                        var name = driver.FindElement(By.CssSelector("body > div.maincon > div.containermain > div.maincontentcontainer > div.maincontent1 > div:nth-child(2) > a > span"));
+                        var module_name = name.Text;
+                        var input = driver.FindElement(By.CssSelector("body > div.maincon > div.containermain > div.maincontentcontainer > div.sidecontent1 > div.mainblock.searchblock.withoverflow > form > div:nth-child(2) > div > div > div > ul.TokensContainer.Autosize > li.TokenSearch > input"));
+                        Thread.Sleep(2000);
+                        input.SendKeys(module_name);
+
+                        var webElements = driver.FindElements(By.TagName("li"));
+
+                        foreach (var element in webElements)
+                        {
+                            if (element.Text == module_name)
+                            {
+                                element.Click();
+                            }
+                        }
+
+                        var near = driver.FindElement(By.XPath("//*[@id=\"autocompletestar\"]"));
+                        near.Clear();
+                        near.SendKeys(lastKnownSystem);
+                        Thread.Sleep(1000);
+                        near.SendKeys(Keys.Enter);
+
+                        var submit = driver.FindElement(By.CssSelector("body > div.maincon > div.containermain > div.maincontentcontainer > div.sidecontent1 > div.mainblock.searchblock.withoverflow > form > div.formelement > input[type=submit]"));
+                        submit.Click();
+                    }
+                    catch (Exception)
+                    {
+                        vaProxy.WriteToLog($"An error occurred looking up the module", "red");
+                    }
                 }
 
                 if (typeof(T) == typeof(Commodities.Commodity))
