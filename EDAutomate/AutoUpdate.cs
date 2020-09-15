@@ -8,11 +8,14 @@ using System.Threading;
 using AutoUpdaterDotNET;
 using System.Reflection;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace EDAutomate
 {
     class AutoUpdate
     {
+        //private static Process[] processes;
+        //private static string procName = "voiceattack";
         public static void CheckForUpdates(dynamic vaProxy)
         {
             //var myAssemblyName = Assembly.GetExecutingAssembly().GetReferencedAssemblies().Where(e => e.Name == "EDAutomatePlugin").FirstOrDefault();
@@ -33,13 +36,19 @@ namespace EDAutomate
             AutoUpdater.InstallationPath = @".\Apps";
             //vaProxy.WriteToLog($"{AutoUpdater.InstallationPath}", "red");
 
+            
+
             AutoUpdater.Start("https://raw.githubusercontent.com/lawen4cer/EDAutomateVoiceAttackPlugin/update/update.xml", myAssembly);
 
         }
 
         private static void AutoUpdater_ApplicationExitEvent()
         {
-            Environment.Exit(0);
+         
+            MessageBox.Show("Voice attack will now restart to finish updating Ed Automate", "Restart Required", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            Thread.Sleep(1000);
+            Application.OpenForms["frmMain"].Close();
+
         }
     }
 }
