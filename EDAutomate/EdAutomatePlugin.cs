@@ -57,6 +57,7 @@ namespace EDAutomate
 
         public static void VA_Invoke1(dynamic vaProxy)
         {
+            var proxy = new Proxy(vaProxy);
             switch (vaProxy.Context)
             {
                 case "commodity search":
@@ -67,7 +68,7 @@ namespace EDAutomate
                     WebDriverHandler.OpenInara<Engineers.Engineer>(vaProxy, ENGINEER_URL, ENGINEER_VARIABLE);
                     break;
                 case "module search":
-                    WebDriverHandler.OpenInara<Modules.Module>(vaProxy, MODULE_URL, MODULE_VARIABLE, JournalWatcherService.LastKnownSystem);
+                    WebDriverHandler.OpenInara<Modules.Module>(proxy, MODULE_URL, MODULE_VARIABLE, JournalWatcherService.LastKnownSystem);
                     break;
                 case "mining search":
                     WebDriverHandler.OpenMinerTool(vaProxy, JournalWatcherService.LastKnownSystem);

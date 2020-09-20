@@ -1,16 +1,16 @@
 ﻿using EDAutomate.Enums;
-using Xunit;
 using Moq;
+using Xunit;
 
-namespace EDAutomate.UnitTests
-{
-    public class EnumParser_Tests {
-        [Fact]
-        public void ParseStringToEnum_TestParameterizedInput () {
-            var mockVaProxy = new Mock<VoiceAttack.VoiceAttackInvokeProxyClass>();
-            mockVaProxy.Setup(x => GetText(It.Is<string>(s => s == "moduleVariable"))).Returns("seven B Shield Cell Bank");
-            var result = EnumParser.ParseStringToEnum<Modules.Module>(mockVaProxy, "moduleVariable", typeof(Modules.Module));
-            Assert.Equal(Modules.Module.sevenBShieldCellBank, result);
+namespace EDAutomate.UnitTests {
+    public class EnumParser_Tests : TestBase {
+        [Theory]
+        [InlineData("seven B Shield Cell Bank", Modules.Module.sevenBShieldCellBank)]
+        [InlineData("five A Frame Shift Drive", Modules.Module.fiveAFrameShiftDrive)]
+        public void ParseStringToEnum_TestParameterizedInput (string inputFromCommand, Modules.Module translatedEnum) {
+            Proxy.Setup (x => x.GetText (It.Is<string> (s => s == "moduleVariable"))).Returns (inputFromCommand);
+            var result = EnumParser.ParseStringToEnum<Modules.Module> (Proxy.Object, "moduleVariable", typeof (Modules.Module));
+            Assert.Equal (translatedEnum, result);
         }
     }
 }

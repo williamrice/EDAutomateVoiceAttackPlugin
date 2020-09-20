@@ -10,9 +10,8 @@ namespace EDAutomate
             return incoming.Replace(" ", "").Replace("-", "");
         }
 
-        public static Enum ParseStringToEnum<T>(dynamic vaProxy, string varName, Type enumType) where T : Enum
+        public static Enum ParseStringToEnum<T>(Proxy vaProxy, string varName, Type enumType) where T : Enum
         {
-            MessageBox.Show(vaProxy.GetType().ToString());
             Enum result = null;
             string incoming = vaProxy.GetText(varName);
             string parsed = ParseStringToMatchEnum(incoming);

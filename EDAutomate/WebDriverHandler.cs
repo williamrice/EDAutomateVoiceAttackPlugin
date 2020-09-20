@@ -26,7 +26,7 @@ namespace EDAutomate
             }
             return driver;
         }
-        public static void OpenInara<T>(dynamic vaProxy, string url, string vaVarName, string lastKnownSystem = "sol") where T : Enum
+        public static void OpenInara<T>(Proxy vaProxy, string url, string vaVarName, string lastKnownSystem = "sol") where T : Enum
         {
             //vaProxy.WriteToLog($"{vaProxy.GetText(vaVarName)}", "orange");
 
