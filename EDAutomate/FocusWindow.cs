@@ -57,7 +57,6 @@ namespace EDAutomate
                 const uint SW_SHOW = 5;
 
                 if (foreThread != appThread)
-
                 {
 
                     AttachThreadInput(foreThread, appThread, true);

@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ * Copyright 2020 Billy Rice. All rights reserved.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,8 +18,10 @@ namespace EDAutomate
 {
     class AutoUpdate
     {
-        //private static Process[] processes;
-        //private static string procName = "voiceattack";
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vaProxy"></param>
         public static void CheckForUpdates(dynamic vaProxy)
         {
             //var myAssemblyName = Assembly.GetExecutingAssembly().GetReferencedAssemblies().Where(e => e.Name == "EDAutomatePlugin").FirstOrDefault();
@@ -46,7 +52,6 @@ namespace EDAutomate
         {
          
             MessageBox.Show("Voice attack will now restart to finish updating Ed Automate. This release includes profile changes! Make sure that you delete the old ED Automate Profile and re-import the new profile found in the Voice Attack Profile folder in the plugin after the restart", "Restart Required", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
-            Thread.Sleep(1000);
             Application.OpenForms["frmMain"].Close();
 
         }

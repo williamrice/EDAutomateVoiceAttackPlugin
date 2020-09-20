@@ -12,7 +12,7 @@ namespace EDAutomate
         public static string ParseModuleName(dynamic vaProxy)
         {
             string name = vaProxy.GetText("moduleVariable");
-            var parsed = name.Replace("one ", "1").Replace("two ", "2").Replace("three ", "3").Replace("four ", "4").Replace("five ", "5").Replace("six ", "6").Replace("seven ", "7").Replace("eight ", "8").Replace("nine ", "9").Replace("zero ", "0");
+            var parsed = name.ToLowerInvariant().Replace("one ", "1").Replace("two ", "2").Replace("three ", "3").Replace("four ", "4").Replace("five ", "5").Replace("six ", "6").Replace("seven ", "7").Replace("eight ", "8").Replace("nine ", "9").Replace("zero ", "0");
 
             vaProxy.WriteToLog($"{parsed}", "orange");
             return parsed;

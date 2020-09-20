@@ -1,10 +1,13 @@
 ﻿using System;
+using EDAutomate.Enums;
 
 namespace EDAutomate
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EdAutomatePlugin
     {
-
         public static readonly string COMMODITY_URL = "https://inara.cz/galaxy-commodity/";
         public static readonly string ENGINEER_URL = "https://inara.cz/galaxy-engineer/";
         public static readonly string MODULE_URL = "https://inara.cz/galaxy-outfitting-stations/";
@@ -12,9 +15,13 @@ namespace EDAutomate
         public static readonly string ENGINEER_VARIABLE = "engineerVariable";
         public static readonly string MODULE_VARIABLE = "moduleVariable";
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static string VA_DisplayName()
         {
-            return "Ed Automate Plugin - V0.0.0.6alpha";
+            return Constants.DisplayName;
         }
 
         public static string VA_DisplayInfo()
@@ -26,8 +33,6 @@ namespace EDAutomate
         {
             return new Guid("{3c78a069-2423-4b62-a841-ce4f832e61ab}");
         }
-
-        static Boolean _stopVariableToMonitor = false;
 
         public static void VA_StopCommand()
         {
@@ -76,5 +81,7 @@ namespace EDAutomate
         {
 
         }
+
+        static Boolean _stopVariableToMonitor = false;
     }
 }

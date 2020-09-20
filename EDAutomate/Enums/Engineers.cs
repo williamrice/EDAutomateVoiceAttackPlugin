@@ -1,6 +1,6 @@
 ﻿namespace EDAutomate.Enums
 {
-    class Engineers
+    public class Engineers
     {
         public enum Engineer
         {

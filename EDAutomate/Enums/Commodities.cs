@@ -1,6 +1,6 @@
 ﻿namespace EDAutomate.Enums
 {
-    class Commodities
+    public class Commodities
     {
         public enum Commodity
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace EDAutomate
 {
@@ -11,6 +12,7 @@ namespace EDAutomate
 
         public static Enum ParseStringToEnum<T>(dynamic vaProxy, string varName, Type enumType) where T : Enum
         {
+            MessageBox.Show(vaProxy.GetType().ToString());
             Enum result = null;
             string incoming = vaProxy.GetText(varName);
             string parsed = ParseStringToMatchEnum(incoming);
