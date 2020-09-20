@@ -1,14 +1,16 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿/*
+ * Copyright 2020 Billy Rice. All rights reserved.
+ */
 
-namespace EDAutomate
+using EDAutomate.Enums;
+using EDAutomate.Utilities;
+using OpenQA.Selenium;
+using System;
+using System.Threading;
+
+namespace EDAutomate.Services
 {
-    class MiningSearch
+    class MiningSearchService
     {
         private const string URL = "https://edtools.cc/miner";
         private const string REFSYSTEMXPATH = "//*[@id=\"ref_sys\"]";
@@ -21,12 +23,16 @@ namespace EDAutomate
 
         private static string TargetPath { get; set; }
 
-        public static void SearchForMiningData(IWebDriver driver, dynamic vaProxy, string lastKnownSystem = "sol")
+        /// <summary>
+        /// This function opens a web browser and searches for the specified mining mineral on edtools.cc/miner
+        /// </summary>
+        /// <param name="driver">The webdriver used to display the webpage</param>
+        /// <param name="vaProxy">The VoiceAttackProxy object</param>
+        /// <param name="lastKnownSystem">The last known system that you want to search for as the reference system</param>
+        public static void SearchForMiningData(IWebDriver driver, VoiceAttackProxy vaProxy, string lastKnownSystem = "sol")
         {
             try
             {
-                
-                //vaProxy.WriteToLog($"{URL} - {driver.GetHashCode()}", "red");
                 driver.Url = URL;
                 Thread.Sleep(1200);
                 var refInput = driver.FindElement(By.XPath(REFSYSTEMXPATH));
@@ -36,8 +42,7 @@ namespace EDAutomate
             }
             catch (Exception)
             {
-
-                vaProxy.WriteToLog("Error: Unable to find the ref system input", "red");
+                vaProxy.WriteToLog("Error: Unable to find the ref system input", LogColors.LogColor.red);
             }
 
             try
@@ -75,7 +80,7 @@ namespace EDAutomate
             }
             catch (Exception)
             {
-                vaProxy.WriteToLog("Error: Unable to find button for requested mineral", "red");
+                vaProxy.WriteToLog("Error: Unable to find button for requested mineral", LogColors.LogColor.red);
             }
         }
 

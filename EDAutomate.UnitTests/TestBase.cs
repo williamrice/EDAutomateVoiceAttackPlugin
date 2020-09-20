@@ -1,19 +1,19 @@
-﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Copyright 2020 Billy Rice. All rights reserved.
+ */
+
+using EDAutomate.Utilities;
+using Moq;
 
 namespace EDAutomate.UnitTests
 {
     public class TestBase
     {
-        public Mock<Proxy> Proxy { get; set; }
+        public Mock<VoiceAttackProxy> Proxy { get; set; }
 
         public TestBase()
         {
-            Proxy = new Mock<Proxy>();
+            Proxy = new Mock<VoiceAttackProxy>();
         }
     }
 }

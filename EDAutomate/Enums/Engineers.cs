@@ -1,4 +1,8 @@
-﻿namespace EDAutomate.Enums
+﻿/*
+ * Copyright 2020 Billy Rice. All rights reserved.
+ */
+
+namespace EDAutomate.Enums
 {
     public class Engineers
     {
