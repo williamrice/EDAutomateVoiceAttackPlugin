@@ -75,12 +75,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnumParser.Tests.cs" />
-    <Compile Include="MiningSearchService.Tests.cs" />
+    <Compile Include="EnumParserTests\EnumParser.Tests.cs" />
+    <Compile Include="WebDriverTests\MiningSearchService.Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestBase.cs" />
-    <Compile Include="WebDriverService.Tests.cs" />
-    <Compile Include="WebDriverTestsBase.cs" />
+    <Compile Include="MockProxyTestBase.cs" />
+    <Compile Include="WebDriverTests\WebDriverService.Tests.cs" />
+    <Compile Include="WebDriverTests\WebDriverTestsBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

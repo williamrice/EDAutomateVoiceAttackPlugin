@@ -7,11 +7,11 @@ using Moq;
 
 namespace EDAutomate.UnitTests
 {
-    public class TestBase
+    public class MockProxyTestBase
     {
         public Mock<VoiceAttackProxy> Proxy { get; set; }
 
-        public TestBase()
+        public MockProxyTestBase()
         {
             Proxy = new Mock<VoiceAttackProxy>();
         }
