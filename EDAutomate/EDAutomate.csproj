@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\LogColor.cs" />
+    <Compile Include="Enums\Ships.cs" />
     <Compile Include="Services\AutoUpdateService.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="EdAutomatePlugin.cs" />

@@ -46,6 +46,8 @@ namespace EDAutomate.Services
 
             Enum? _addUrlEnd = EnumParser.ParseStringToEnum<T>(vaProxy, vaVarName, typeof(T));
 
+           
+
             if (_addUrlEnd == null)
             {
                 vaProxy.WriteToLog($"An error occurred. Parsed value is null", LogColors.LogColor.red);
@@ -72,14 +74,23 @@ namespace EDAutomate.Services
 
                 try
                 {
-                    driver.Url = url + Convert.ToInt32(_addUrlEnd);
+                    if (typeof(T) == typeof(Ships.Ship))
+                    {
+                        var shipUrlPost = Constants.ShipSearchPreFix + Convert.ToInt32(_addUrlEnd);
+                        driver.Url = url + shipUrlPost;
+                    }
+                    else
+                    {
+                        driver.Url = url + Convert.ToInt32(_addUrlEnd);
+                    }
+                    
                 }
                 catch (Exception)
                 {
                     vaProxy.WriteToLog($"ERROR: Could not connect to the webdriver, Check your network connection and try again", LogColors.LogColor.red);
                 }
 
-                if (typeof(T) == typeof(Modules.Module))
+                if (typeof(T) == typeof(Modules.Module) || typeof(T) == typeof(Ships.Ship))
                 {
                     try
                     {
@@ -89,14 +100,17 @@ namespace EDAutomate.Services
                         Thread.Sleep(2000);
                         input.SendKeys(module_name);
 
-                        var webElements = driver.FindElements(By.TagName("li"));
-
-                        foreach (var element in webElements)
+                        if (typeof(T) == typeof(Modules.Module))
                         {
-                            if (element.Text == module_name)
+                            var webElements = driver.FindElements(By.TagName("li"));
+
+                            foreach (var element in webElements)
                             {
-                                element.Click();
-                            }
+                                if (element.Text == module_name)
+                                {
+                                    element.Click();
+                                }
+                            } 
                         }
 
                         var near = driver.FindElement(By.XPath("//*[@id=\"autocompletestar\"]"));
@@ -107,10 +121,13 @@ namespace EDAutomate.Services
 
                         var submit = driver.FindElement(By.CssSelector("body > div.maincon > div.containermain > div.maincontentcontainer > div.sidecontent1 > div.mainblock.searchblock.withoverflow > form > div.formelement > input[type=submit]"));
                         submit.Click();
+                                                                   
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
                         vaProxy.WriteToLog($"An error occurred looking up the module", LogColors.LogColor.red);
+                        vaProxy.WriteToLog($"{e.StackTrace}", LogColors.LogColor.pink);
+                        vaProxy.WriteToLog($"{e.Message}", LogColors.LogColor.pink);
                     }
                 }
 
