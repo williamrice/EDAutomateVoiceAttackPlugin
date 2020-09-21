@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Users\billy\Desktop\Ed Automate\Ed Automate\</OutputPath>
+    <OutputPath>..\..\..\Program Files %28x86%29\Steam\steamapps\common\VoiceAttack\Apps\ED Automate\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -62,18 +62,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoUpdate.cs" />
-    <Compile Include="Commodities.cs" />
+    <Compile Include="Enums\LogColor.cs" />
+    <Compile Include="Services\AutoUpdateService.cs" />
+    <Compile Include="Utilities\Constants.cs" />
     <Compile Include="EdAutomatePlugin.cs" />
-    <Compile Include="Engineers.cs" />
-    <Compile Include="FocusWindow.cs" />
-    <Compile Include="JournalWatcherService.cs" />
-    <Compile Include="MiningSearch.cs" />
-    <Compile Include="ModuleParser.cs" />
-    <Compile Include="Modules.cs" />
+    <Compile Include="Enums\Commodities.cs" />
+    <Compile Include="Enums\Engineers.cs" />
+    <Compile Include="Enums\Modules.cs" />
+    <Compile Include="Services\JournalWatcherService.cs" />
+    <Compile Include="Services\MiningSearchService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EnumParser.cs" />
-    <Compile Include="WebDriverHandler.cs" />
+    <Compile Include="Utilities\EnumParser.cs" />
+    <Compile Include="Utilities\VoiceAttackProxy.cs" />
+    <Compile Include="Services\WebDriverService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

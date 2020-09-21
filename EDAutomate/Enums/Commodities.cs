@@ -1,6 +1,10 @@
-﻿namespace EDAutomate
+﻿/*
+ * Copyright 2020 Billy Rice. All rights reserved.
+ */
+
+namespace EDAutomate.Enums
 {
-    class Commodities
+    public class Commodities
     {
         public enum Commodity
         {

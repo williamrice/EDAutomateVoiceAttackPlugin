@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Copyright 2020 Billy Rice. All rights reserved.
+ */
 
-namespace EDAutomate
+namespace EDAutomate.Enums
 {
-    class Modules
+    public class Modules
     {
         public enum Module
         {
@@ -88,14 +86,14 @@ namespace EDAutomate
             twoIFixedMineLauncher = 45441,
             oneIFixedMineLauncher = 45405,
             oneDFixedMiningLanceBeamLaser = 1,
-            zeroIChaffLauncher = 32409,
-            zeroFElectronicCountermeasure = 33702,
+            ChaffLauncher = 32409,
+            ElectronicCountermeasure = 33702,
             zeroAFrameShiftWakeScanner = 42769,
             zeroBFrameShiftWakeScanner = 42770,
             zeroCFrameShiftWakeScanner = 42771,
             zeroDFrameShiftWakeScanner = 42772,
             zeroEFrameShiftWakeScanner = 42773,
-            zeroIHeatSinkLauncher = 35001,
+            HeatSinkLauncher = 35001,
             zeroAKillWarrantScanner = 44065,
             zeroBKillWarrantScanner = 44066,
             zeroCKillWarrantScanner = 44067,
@@ -106,7 +104,7 @@ namespace EDAutomate
             zeroCManifestScanner = 31107,
             zeroDManifestScanner = 31108,
             zeroEManifestScanner = 31109,
-            oneEAdvancedDockingComputer = 129907,
+            AdvancedDockingComputer = 129907,
             eightAAutoFieldMaintenanceUnit = 70273,
             eightBAutoFieldMaintenanceUnit = 70274,
             eightCAutoFieldMaintenanceUnit = 70275,
