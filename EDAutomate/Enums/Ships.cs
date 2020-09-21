@@ -20,7 +20,7 @@ namespace EDAutomate.Enums
             BelugaLiner = 57,
             CobraMarkThree = 25,
             CobraMarkFour = 26,
-            DiamondbackExplorer =31 ,
+            DiamondbackExplorer = 31 ,
             DiamondbackScout = 24,
             Dolphin = 58,
             EagleMarkTwo = 5,

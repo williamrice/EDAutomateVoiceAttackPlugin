@@ -13,11 +13,7 @@ namespace EDAutomate.Services
 {
     public class WebDriverService
     {
-        private const string FINDMODULEXPATH = "//*[@id=\"s2id_autogen3\"]";
-        private const string DROPDOWNXPATH = "//*[@id=\"select2-chosen-17\"]";
-        private const string REFERENCESYSTEMXPATH = "//*[@id=\"s2id_autogen17_search\"]";
-
-        private static string ChromeDriverPath { get; } = @".\Apps\ED Automate\drivers\";
+        private static string ChromeDriverPath { get; } = Constants.ChromeDriverPath;
 
         private static IWebDriver driver = null;
         /// <summary>
@@ -94,9 +90,9 @@ namespace EDAutomate.Services
                 {
                     try
                     {
-                        var name = driver.FindElement(By.CssSelector("body > div.maincon > div.containermain > div.maincontentcontainer > div.maincontent1 > div:nth-child(2) > a > span"));
+                        var name = driver.FindElement(By.CssSelector(Constants.ModuleNameCssSelector));
                         var module_name = name.Text;
-                        var input = driver.FindElement(By.CssSelector("body > div.maincon > div.containermain > div.maincontentcontainer > div.sidecontent1 > div.mainblock.searchblock.withoverflow > form > div:nth-child(2) > div > div > div > ul.TokensContainer.Autosize > li.TokenSearch > input"));
+                        var input = driver.FindElement(By.CssSelector(Constants.ModuleShipInputCssSelector));
                         Thread.Sleep(2000);
                         input.SendKeys(module_name);
 
@@ -113,13 +109,13 @@ namespace EDAutomate.Services
                             } 
                         }
 
-                        var near = driver.FindElement(By.XPath("//*[@id=\"autocompletestar\"]"));
+                        var near = driver.FindElement(By.XPath(Constants.ModuleShipNearestSystemInputXPath));
                         near.Clear();
                         near.SendKeys(lastKnownSystem);
                         Thread.Sleep(1000);
                         near.SendKeys(Keys.Enter);
 
-                        var submit = driver.FindElement(By.CssSelector("body > div.maincon > div.containermain > div.maincontentcontainer > div.sidecontent1 > div.mainblock.searchblock.withoverflow > form > div.formelement > input[type=submit]"));
+                        var submit = driver.FindElement(By.CssSelector(Constants.ModuleShipSubmitButtonCssSelector));
                         submit.Click();
                                                                    
                     }
@@ -133,7 +129,7 @@ namespace EDAutomate.Services
 
                 if (typeof(T) == typeof(Commodities.Commodity))
                 {
-                    var starSystemSearch = driver.FindElement(By.XPath("//*[@id=\"autocompletestar\"]"));
+                    var starSystemSearch = driver.FindElement(By.XPath(Constants.CommodityStarSystemSearchXPath));
 
                     starSystemSearch.SendKeys(lastKnownSystem);
                     Thread.Sleep(2000);
@@ -141,12 +137,12 @@ namespace EDAutomate.Services
 
                     if (vaProxy.GetText("buyorsell") == "buy")
                     {
-                        var exports = driver.FindElement(By.XPath("//*[@id=\"ui-id-9\"]"));
+                        var exports = driver.FindElement(By.XPath(Constants.CommodityExportsButtonXPath));
                         exports.Click();
                     }
                 }
 
-                vaProxy.SetBoolean("webDriverSuccess", true);
+                vaProxy.SetBoolean(Constants.VoiceAttackWebDriverSuccessVariable, true);
             }
             catch (Exception e)
             {
