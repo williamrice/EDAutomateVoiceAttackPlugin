@@ -4,6 +4,7 @@
 
 using EDAutomate.Enums;
 using EDAutomate.Utilities;
+using EliteJournalReader;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -95,25 +96,36 @@ namespace EDAutomate.Services
                         var input = driver.FindElement(By.CssSelector(Constants.ModuleShipInputCssSelector));
                         Thread.Sleep(2000);
                         input.SendKeys(module_name);
+                        Thread.Sleep(500);
 
+                        if (typeof(T) == typeof(Ships.Ship))
+                        {
+                            input.SendKeys(Keys.Enter);
+                        }
                         if (typeof(T) == typeof(Modules.Module))
                         {
                             var webElements = driver.FindElements(By.TagName("li"));
 
                             foreach (var element in webElements)
                             {
-                                if (element.Text == module_name)
+                                if (element.Text.ToLower() == module_name.ToLower())
                                 {
+                                    vaProxy.WriteToLog($"{element.Text.ToLower()}", LogColors.LogColor.pink);
                                     element.Click();
                                 }
-                            } 
+                            }
                         }
 
+                        Thread.Sleep(500);
                         var near = driver.FindElement(By.XPath(Constants.ModuleShipNearestSystemInputXPath));
+                        
+                        Thread.Sleep(1000);
                         near.Clear();
+                        Thread.Sleep(1000);
                         near.SendKeys(lastKnownSystem);
                         Thread.Sleep(1000);
                         near.SendKeys(Keys.Enter);
+                        Thread.Sleep(1000);
 
                         var submit = driver.FindElement(By.CssSelector(Constants.ModuleShipSubmitButtonCssSelector));
                         submit.Click();
