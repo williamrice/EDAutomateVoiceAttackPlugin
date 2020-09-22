@@ -19,21 +19,21 @@ namespace EDAutomate.Services
         /// <param name="vaProxy">VoiceAttackProxy object</param>
         public static void CheckForUpdates(VoiceAttackProxy vaProxy)
         {
-            Assembly.Load("EDAutomatePlugin");
-            var myAssembly = AppDomain.CurrentDomain.GetAssemblies().Where(e => e.GetName().Name == "EDAutomatePlugin").FirstOrDefault();
+            Assembly.Load(Constants.EdAutomateAssemblyName);
+            var myAssembly = AppDomain.CurrentDomain.GetAssemblies().Where(e => e.GetName().Name == Constants.EdAutomateAssemblyName).FirstOrDefault();
 
             AutoUpdater.ShowSkipButton = false;
             AutoUpdater.ShowRemindLaterButton = false;
             AutoUpdater.Mandatory = true;
             AutoUpdater.ApplicationExitEvent += AutoUpdater_ApplicationExitEvent;
-            AutoUpdater.InstallationPath = @".\Apps";
-            AutoUpdater.Start("https://raw.githubusercontent.com/lawen4cer/EDAutomateVoiceAttackPlugin/update/update.xml", myAssembly);
+            AutoUpdater.InstallationPath = Constants.UpdateInstallationPath;
+            AutoUpdater.Start(Constants.UpdateXmlUrl, myAssembly);
         }
 
         private static void AutoUpdater_ApplicationExitEvent()
         {
-            MessageBox.Show("Voice attack will now restart to finish updating Ed Automate. This release includes profile changes! Make sure that you delete the old ED Automate Profile and re-import the new profile found in the Voice Attack Profile folder in the plugin after the restart", "Restart Required", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
-            Application.OpenForms["frmMain"].Close();
+            MessageBox.Show(Constants.OnExitMessageBoxText, Constants.OnExitMessageBoxTitle , MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            Application.OpenForms[Constants.VoiceAttackMainFormName].Close();
         }
     }
 }

@@ -14,14 +14,7 @@ namespace EDAutomate
     /// </summary>
     public class EdAutomatePlugin
     {
-        public static readonly string COMMODITY_URL = "https://inara.cz/galaxy-commodity/";
-        public static readonly string ENGINEER_URL = "https://inara.cz/galaxy-engineer/";
-        public static readonly string SHIP_MODULE_URL = "https://inara.cz/galaxy-outfitting-stations/";
-        public static readonly string COMMODITY_VARIABLE = "commodityName";
-        public static readonly string ENGINEER_VARIABLE = "engineerVariable";
-        public static readonly string MODULE_VARIABLE = "moduleVariable";
-        public static readonly string SHIP_VARIABLE = "shipVariable";
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -68,20 +61,20 @@ namespace EDAutomate
             var proxy = new VoiceAttackProxy(vaProxy);
             switch (vaProxy.Context)
             {
-                case "commodity search":
-                    WebDriverService.OpenInara<Commodities.Commodity>(proxy, COMMODITY_URL, COMMODITY_VARIABLE, JournalWatcherService.LastKnownSystem);
+                case Constants.CommoditySearchContext:
+                    WebDriverService.OpenInara<Commodities.Commodity>(proxy, Constants.CommodityUrl, Constants.VoiceAttackCommodityVariable, JournalWatcherService.LastKnownSystem);
                     break;
-                case "engineer search":
-                    WebDriverService.OpenInara<Engineers.Engineer>(proxy, ENGINEER_URL, ENGINEER_VARIABLE, JournalWatcherService.LastKnownSystem);
+                case Constants.EngineerSearchContext:
+                    WebDriverService.OpenInara<Engineers.Engineer>(proxy, Constants.EngineerUrl, Constants.VoiceAttackEngineerVariable, JournalWatcherService.LastKnownSystem);
                     break;
-                case "module search":
-                    WebDriverService.OpenInara<Modules.Module>(proxy, SHIP_MODULE_URL, MODULE_VARIABLE, JournalWatcherService.LastKnownSystem);
+                case Constants.ModuleSearchContext:
+                    WebDriverService.OpenInara<Modules.Module>(proxy, Constants.ShipModuleUrl, Constants.VoiceAttackModuleVariable, JournalWatcherService.LastKnownSystem);
                     break;
-                case "mining search":
+                case Constants.MiningSearchContext:
                     WebDriverService.OpenMinerTool(vaProxy, JournalWatcherService.LastKnownSystem);
                     break;
-                case "ship search":
-                    WebDriverService.OpenInara<Ships.Ship>(proxy, SHIP_MODULE_URL, SHIP_VARIABLE, JournalWatcherService.LastKnownSystem);
+                case Constants.ShipSearchContext:
+                    WebDriverService.OpenInara<Ships.Ship>(proxy, Constants.ShipModuleUrl, Constants.VoiceAttackShipVariable, JournalWatcherService.LastKnownSystem);
                     break;
                 default:
                     break;

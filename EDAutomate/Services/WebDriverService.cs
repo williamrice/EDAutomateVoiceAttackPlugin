@@ -4,6 +4,7 @@
 
 using EDAutomate.Enums;
 using EDAutomate.Utilities;
+using EliteJournalReader;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -13,11 +14,7 @@ namespace EDAutomate.Services
 {
     public class WebDriverService
     {
-        private const string FINDMODULEXPATH = "//*[@id=\"s2id_autogen3\"]";
-        private const string DROPDOWNXPATH = "//*[@id=\"select2-chosen-17\"]";
-        private const string REFERENCESYSTEMXPATH = "//*[@id=\"s2id_autogen17_search\"]";
-
-        private static string ChromeDriverPath { get; } = @".\Apps\ED Automate\drivers\";
+        private static string ChromeDriverPath { get; } = Constants.ChromeDriverPath;
 
         private static IWebDriver driver = null;
         /// <summary>
@@ -94,32 +91,43 @@ namespace EDAutomate.Services
                 {
                     try
                     {
-                        var name = driver.FindElement(By.CssSelector("body > div.maincon > div.containermain > div.maincontentcontainer > div.maincontent1 > div:nth-child(2) > a > span"));
+                        var name = driver.FindElement(By.CssSelector(Constants.ModuleNameCssSelector));
                         var module_name = name.Text;
-                        var input = driver.FindElement(By.CssSelector("body > div.maincon > div.containermain > div.maincontentcontainer > div.sidecontent1 > div.mainblock.searchblock.withoverflow > form > div:nth-child(2) > div > div > div > ul.TokensContainer.Autosize > li.TokenSearch > input"));
+                        var input = driver.FindElement(By.CssSelector(Constants.ModuleShipInputCssSelector));
                         Thread.Sleep(2000);
                         input.SendKeys(module_name);
+                        Thread.Sleep(500);
 
+                        if (typeof(T) == typeof(Ships.Ship))
+                        {
+                            input.SendKeys(Keys.Enter);
+                        }
                         if (typeof(T) == typeof(Modules.Module))
                         {
                             var webElements = driver.FindElements(By.TagName("li"));
 
                             foreach (var element in webElements)
                             {
-                                if (element.Text == module_name)
+                                if (element.Text.ToLower() == module_name.ToLower())
                                 {
+                                    vaProxy.WriteToLog($"{element.Text.ToLower()}", LogColors.LogColor.pink);
                                     element.Click();
                                 }
-                            } 
+                            }
                         }
 
-                        var near = driver.FindElement(By.XPath("//*[@id=\"autocompletestar\"]"));
+                        Thread.Sleep(500);
+                        var near = driver.FindElement(By.XPath(Constants.ModuleShipNearestSystemInputXPath));
+                        
+                        Thread.Sleep(1000);
                         near.Clear();
+                        Thread.Sleep(1000);
                         near.SendKeys(lastKnownSystem);
                         Thread.Sleep(1000);
                         near.SendKeys(Keys.Enter);
+                        Thread.Sleep(1000);
 
-                        var submit = driver.FindElement(By.CssSelector("body > div.maincon > div.containermain > div.maincontentcontainer > div.sidecontent1 > div.mainblock.searchblock.withoverflow > form > div.formelement > input[type=submit]"));
+                        var submit = driver.FindElement(By.CssSelector(Constants.ModuleShipSubmitButtonCssSelector));
                         submit.Click();
                                                                    
                     }
@@ -133,7 +141,7 @@ namespace EDAutomate.Services
 
                 if (typeof(T) == typeof(Commodities.Commodity))
                 {
-                    var starSystemSearch = driver.FindElement(By.XPath("//*[@id=\"autocompletestar\"]"));
+                    var starSystemSearch = driver.FindElement(By.XPath(Constants.CommodityStarSystemSearchXPath));
 
                     starSystemSearch.SendKeys(lastKnownSystem);
                     Thread.Sleep(2000);
@@ -141,12 +149,12 @@ namespace EDAutomate.Services
 
                     if (vaProxy.GetText("buyorsell") == "buy")
                     {
-                        var exports = driver.FindElement(By.XPath("//*[@id=\"ui-id-9\"]"));
+                        var exports = driver.FindElement(By.XPath(Constants.CommodityExportsButtonXPath));
                         exports.Click();
                     }
                 }
 
-                vaProxy.SetBoolean("webDriverSuccess", true);
+                vaProxy.SetBoolean(Constants.VoiceAttackWebDriverSuccessVariable, true);
             }
             catch (Exception e)
             {

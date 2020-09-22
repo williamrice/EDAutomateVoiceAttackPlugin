@@ -12,15 +12,7 @@ namespace EDAutomate.Services
 {
     class MiningSearchService
     {
-        private const string URL = "https://edtools.cc/miner";
-        private const string REFSYSTEMXPATH = "//*[@id=\"ref_sys\"]";
-        private const string PAINITEBUTTONXPATH = "//*[@id=\"btn_painite\"]";
-        private const string LTDBUTTONXPATH = "//*[@id=\"btn_ltd\"]";
-        private const string VOIDOPALSBUTTONXPATH = "//*[@id=\"btn_vop\"]";
-        private const string BENITOITEBUTTONXPATH = "//*[@id=\"btn_ben\"]";
-        private const string SERENDIBITEBUTTONXPATH = "//*[@id=\"btn_ser\"]";
-        private const string MUSGRAVITEBUTTONXPATH = "//*[@id=\"btn_mus\"]";
-
+        
         private static string TargetPath { get; set; }
 
         /// <summary>
@@ -29,44 +21,44 @@ namespace EDAutomate.Services
         /// <param name="driver">The webdriver used to display the webpage</param>
         /// <param name="vaProxy">The VoiceAttackProxy object</param>
         /// <param name="lastKnownSystem">The last known system that you want to search for as the reference system</param>
-        public static void SearchForMiningData(IWebDriver driver, VoiceAttackProxy vaProxy, string lastKnownSystem = "sol")
+        public static void SearchForMiningData(IWebDriver driver, VoiceAttackProxy vaProxy, string lastKnownSystem)
         {
             try
             {
-                driver.Url = URL;
+                driver.Url = Constants.MiningSearchUrl;
                 Thread.Sleep(1200);
-                var refInput = driver.FindElement(By.XPath(REFSYSTEMXPATH));
+                var refInput = driver.FindElement(By.XPath(Constants.MiningReferenceSystemXPath));
                 Thread.Sleep(500);
                 refInput.SendKeys(lastKnownSystem);
                 Thread.Sleep(500);
             }
             catch (Exception)
             {
-                vaProxy.WriteToLog("Error: Unable to find the ref system input", LogColors.LogColor.red);
+                vaProxy.WriteToLog(Constants.ErrorMessageMiningSearchRefSystemInputLocatorFailed, LogColors.LogColor.red);
             }
 
             try
             {
-                string? mineral = vaProxy.GetText("miningVariable");
+                string? mineral = vaProxy.GetText(Constants.VoiceAttackMiningVariable);
                 switch (mineral.ToLower().Replace(" ", ""))
                 {
                     case "painite":
-                        TargetPath = PAINITEBUTTONXPATH;
+                        TargetPath = Constants.MiningPainiteButtonXPath;
                         break;
                     case "voidopals":
-                        TargetPath = VOIDOPALSBUTTONXPATH;
+                        TargetPath = Constants.MiningVoidOpalButtonXPath;
                         break;
                     case "benitoite":
-                        TargetPath = BENITOITEBUTTONXPATH;
+                        TargetPath = Constants.MiningBenitoiteButtonXPath;
                         break;
                     case "serendibite":
-                        TargetPath = SERENDIBITEBUTTONXPATH;
+                        TargetPath = Constants.MiningSerendibiteButtonXPath;
                         break;
                     case "musgravite":
-                        TargetPath = MUSGRAVITEBUTTONXPATH;
+                        TargetPath = Constants.MiningMusgraviteButtonXPath;
                         break;
                     default:
-                        TargetPath = LTDBUTTONXPATH;
+                        TargetPath = Constants.MiningLtdButtonXPath;
                         break;
                 }
                 Thread.Sleep(500);
@@ -75,12 +67,12 @@ namespace EDAutomate.Services
                 target.Click();
                 Thread.Sleep(500);
 
-                vaProxy.SetBoolean("webDriverSuccess", true);
+                vaProxy.SetBoolean(Constants.VoiceAttackWebDriverSuccessVariable, true);
 
             }
             catch (Exception)
             {
-                vaProxy.WriteToLog("Error: Unable to find button for requested mineral", LogColors.LogColor.red);
+                vaProxy.WriteToLog(Constants.ErrorMessageMiningSearchButtonFailed, LogColors.LogColor.red);
             }
         }
 
