@@ -56,7 +56,7 @@ namespace EDAutomate.Utilities
         public const string EdAutomateAssemblyName = "EDAutomatePlugin";
         public const string UpdateXmlUrl = "https://raw.githubusercontent.com/lawen4cer/EDAutomateVoiceAttackPlugin/update/update.xml";
         public const string UpdateInstallationPath = @".\Apps";
-        public const string OnExitMessageBoxText = "Voice attack will now restart to finish updating Ed Automate. This release doesn't include any profile changes. No need to re-import the profile this time";
+        public const string OnExitMessageBoxText = "Voice attack will now restart to finish updating Ed Automate. If this update requires a profile swap (check the changelog), make sure you delete the old profile and re-import the new one included in the update! ";
         public const string OnExitMessageBoxTitle = "Restart Required";
         public const string VoiceAttackMainFormName = "frmMain";
 
