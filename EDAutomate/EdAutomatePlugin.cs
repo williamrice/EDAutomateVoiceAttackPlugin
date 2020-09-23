@@ -71,7 +71,7 @@ namespace EDAutomate
                     WebDriverService.OpenInara<Modules.Module>(proxy, Constants.ShipModuleUrl, Constants.VoiceAttackModuleVariable, JournalWatcherService.LastKnownSystem);
                     break;
                 case Constants.MiningSearchContext:
-                    WebDriverService.OpenMinerTool(vaProxy, JournalWatcherService.LastKnownSystem);
+                    WebDriverService.OpenMinerTool(proxy, JournalWatcherService.LastKnownSystem);
                     break;
                 case Constants.ShipSearchContext:
                     WebDriverService.OpenInara<Ships.Ship>(proxy, Constants.ShipModuleUrl, Constants.VoiceAttackShipVariable, JournalWatcherService.LastKnownSystem);

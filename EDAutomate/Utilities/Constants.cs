@@ -3,7 +3,9 @@ namespace EDAutomate.Utilities
     public static class Constants
     {
         //Voice Attack Constants
-        public const string DisplayName = "Ed Automate Plugin - V0.0.0.9alpha";
+
+        public const string DisplayName = "Ed Automate Plugin - V0.0.0.10alpha";
+
         public const string DisplayInfo = "Ed Automate automates input on popular third party Elite Dangerous programs as well as some built in voice commands for OVR Drop";
 
         //Elite Journal Constants
