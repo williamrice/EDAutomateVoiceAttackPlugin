@@ -1,4 +1,6 @@
-﻿using EDAutomate.Utilities;
+﻿using EDAutomate.Enums;
+using EDAutomate.Utilities;
+using Moq;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -38,6 +40,16 @@ namespace EDAutomate.UnitTests
         {
             ChromeDriver.Url = url;
             Assert.True(ChromeDriver.FindElement(By.CssSelector(selector)).Displayed);
+        }
+
+        [Theory]
+        [InlineData("gold", "buy")]
+        [InlineData("void opals", "sell")]
+        public void OpenInaraForCommoditySearchShouldReturnTrueIfNoErrorsOccurred(string inputFromCommand, string buyOrSell)
+        {
+            Proxy.Setup(x => x.GetText(It.Is<string>(s => s == Constants.VoiceAttackCommodityVariable))).Returns(inputFromCommand);
+            Proxy.Setup(x => x.GetText(It.Is<string>(s => s == Constants.VoiceAttackBuyOrSellVariable))).Returns(buyOrSell);
+            Assert.True(WebDriverService.Object.OpenInara<Commodities.Commodity>(Proxy.Object, Constants.CommodityUrl, Constants.VoiceAttackCommodityVariable, "sol"));
         }
     }
 }
