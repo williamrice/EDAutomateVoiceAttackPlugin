@@ -9,7 +9,7 @@ using Xunit;
 
 namespace EDAutomate.UnitTests
 {
-    public class EnumParser_Tests : MockProxyTestBase
+    public class EnumParser_Tests : MockTestBase
     {
         [Theory]
         [InlineData("seven B Shield Cell Bank", Modules.Module.sevenBShieldCellBank)]
