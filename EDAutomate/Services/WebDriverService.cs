@@ -4,12 +4,9 @@
 
 using EDAutomate.Enums;
 using EDAutomate.Utilities;
-using EliteJournalReader;
-using EliteJournalReader.Events;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
-using System.CodeDom;
 using System.Threading;
 
 namespace EDAutomate.Services
@@ -33,7 +30,6 @@ namespace EDAutomate.Services
             }
         }
         public virtual string ChromeDriverPath { get; } = Constants.ChromeDriverPath;
-
         public virtual IWebDriver Driver { get; set; }
 
         public bool WasSuccessful { get; set; }
@@ -80,16 +76,12 @@ namespace EDAutomate.Services
                  * to be throw in order to set the driver to null therefore allowing the GetDriver method to return a new ChromeDriver. This is the only way I can currently enforce
                  * driver to be a singleton in order to prevent the plugin from opening multiple chrome windows each time that a command is ran.
                 */
-                try
-                {
-                    _ = Driver.Url;
-                }
-                catch (Exception)
+                if (isBrowserClosed())
                 {
                     Driver = null;
                 }
-
                 Driver = GetDriver();
+
 
 
                 try
@@ -103,7 +95,7 @@ namespace EDAutomate.Services
                     {
                         Driver.Url = url + Convert.ToInt32(_addUrlEnd);
                     }
-                    
+
                 }
                 catch (Exception)
                 {
@@ -118,7 +110,6 @@ namespace EDAutomate.Services
                         var name = Driver.FindElement(By.CssSelector(Constants.ModuleNameCssSelector));
                         var module_name = name.Text;
                         var input = Driver.FindElement(By.CssSelector(Constants.ModuleShipInputCssSelector));
-                        Thread.Sleep(2000);
                         input.SendKeys(module_name);
                         Thread.Sleep(500);
 
@@ -139,20 +130,16 @@ namespace EDAutomate.Services
                             }
                         }
 
-                        Thread.Sleep(500);
+
                         var near = Driver.FindElement(By.XPath(Constants.ModuleShipNearestSystemInputXPath));
-                        
-                        Thread.Sleep(1000);
+
                         near.Clear();
-                        Thread.Sleep(1000);
                         near.SendKeys(lastKnownSystem);
-                        Thread.Sleep(1000);
                         near.SendKeys(Keys.Enter);
-                        Thread.Sleep(1000);
 
                         var submit = Driver.FindElement(By.CssSelector(Constants.ModuleShipSubmitButtonCssSelector));
                         submit.Click();
-                                                                   
+
                     }
                     catch (Exception e)
                     {
@@ -165,10 +152,11 @@ namespace EDAutomate.Services
 
                 if (typeof(T) == typeof(Commodities.Commodity))
                 {
+
                     var starSystemSearch = Driver.FindElement(By.XPath(Constants.CommodityStarSystemSearchXPath));
 
                     starSystemSearch.SendKeys(lastKnownSystem);
-                    Thread.Sleep(2000);
+
                     starSystemSearch.SendKeys(Keys.Enter);
 
                     if (vaProxy.GetText("buyorsell") == "buy")
@@ -177,8 +165,8 @@ namespace EDAutomate.Services
                         exports.Click();
                     }
                 }
-                
-                
+
+
                 vaProxy.SetBoolean(Constants.VoiceAttackWebDriverSuccessVariable, true);
                 return true;
             }
@@ -227,6 +215,19 @@ namespace EDAutomate.Services
             vaProxy.WriteToLog($"{e.Message} : An error occurred in the web driver", LogColors.LogColor.red);
             vaProxy.WriteToLog($"{e.StackTrace}", LogColors.LogColor.red);
             return;
+        }
+
+        private bool isBrowserClosed()
+        {
+            try
+            {
+                _ = Driver.Url;
+            }
+            catch (WebDriverException)
+            {
+                return true;
+            }
+            return false;
         }
 
 

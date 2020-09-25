@@ -6,13 +6,12 @@ using EDAutomate.Enums;
 using EDAutomate.Utilities;
 using OpenQA.Selenium;
 using System;
-using System.Threading;
 
 namespace EDAutomate.Services
 {
     class MiningSearchService
     {
-        
+
         private static string TargetPath { get; set; }
 
         /// <summary>
@@ -26,12 +25,10 @@ namespace EDAutomate.Services
             try
             {
                 driver.Url = Constants.MiningSearchUrl;
-                Thread.Sleep(1200);
                 var refInput = driver.FindElement(By.XPath(Constants.MiningReferenceSystemXPath));
-                Thread.Sleep(500);
                 refInput.SendKeys(lastKnownSystem);
-                Thread.Sleep(500);
             }
+
             catch (Exception)
             {
                 vaProxy.WriteToLog(Constants.ErrorMessageMiningSearchRefSystemInputLocatorFailed, LogColors.LogColor.red);
@@ -62,11 +59,8 @@ namespace EDAutomate.Services
                         TargetPath = Constants.MiningLtdButtonXPath;
                         break;
                 }
-                Thread.Sleep(500);
                 var target = driver.FindElement(By.XPath(TargetPath));
-                Thread.Sleep(500);
                 target.Click();
-                Thread.Sleep(500);
 
                 vaProxy.SetBoolean(Constants.VoiceAttackWebDriverSuccessVariable, true);
                 return true;
