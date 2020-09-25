@@ -31,7 +31,6 @@ namespace EDAutomate.Services
         }
         public virtual string ChromeDriverPath { get; } = Constants.ChromeDriverPath;
         public virtual IWebDriver Driver { get; set; }
-
         public bool WasSuccessful { get; set; }
 
 
