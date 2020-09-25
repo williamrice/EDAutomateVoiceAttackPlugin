@@ -9,7 +9,7 @@ namespace EDAutomate.Utilities
     public class VoiceAttackProxy
     {
         private dynamic _Proxy;
-     
+
         /// <summary>
         /// A parameterless constructor that is only used in tests. Do not use this in code. There will be no data in _Proxy if you do
         /// </summary>

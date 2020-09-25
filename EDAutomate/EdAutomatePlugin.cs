@@ -14,7 +14,7 @@ namespace EDAutomate
     /// </summary>
     public class EdAutomatePlugin
     {
-        
+
         /// <summary>
         /// 
         /// </summary>
