@@ -21,7 +21,7 @@ namespace EDAutomate.Services
         /// <param name="driver">The webdriver used to display the webpage</param>
         /// <param name="vaProxy">The VoiceAttackProxy object</param>
         /// <param name="lastKnownSystem">The last known system that you want to search for as the reference system</param>
-        public static void SearchForMiningData(IWebDriver driver, VoiceAttackProxy vaProxy, string lastKnownSystem)
+        public static bool SearchForMiningData(IWebDriver driver, VoiceAttackProxy vaProxy, string lastKnownSystem)
         {
             try
             {
@@ -35,6 +35,7 @@ namespace EDAutomate.Services
             catch (Exception)
             {
                 vaProxy.WriteToLog(Constants.ErrorMessageMiningSearchRefSystemInputLocatorFailed, LogColors.LogColor.red);
+                return false;
             }
 
             try
@@ -68,11 +69,13 @@ namespace EDAutomate.Services
                 Thread.Sleep(500);
 
                 vaProxy.SetBoolean(Constants.VoiceAttackWebDriverSuccessVariable, true);
+                return true;
 
             }
             catch (Exception)
             {
                 vaProxy.WriteToLog(Constants.ErrorMessageMiningSearchButtonFailed, LogColors.LogColor.red);
+                return false;
             }
         }
 
