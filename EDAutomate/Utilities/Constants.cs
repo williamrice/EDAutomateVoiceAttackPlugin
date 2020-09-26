@@ -40,6 +40,7 @@ namespace EDAutomate.Utilities
         public const string VoiceAttackModuleVariable = "moduleVariable";
         public const string VoiceAttackShipVariable = "shipVariable";
         public const string VoiceAttackMiningVariable = "miningVariable";
+        public const string VoiceAttackBuyOrSellVariable = "buyorsell";
 
         //Voice Attack Context Constants
         public const string CommoditySearchContext = "commodity search";

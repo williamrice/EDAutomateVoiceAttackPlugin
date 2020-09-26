@@ -78,7 +78,7 @@
     <Compile Include="EnumParserTests\EnumParser.Tests.cs" />
     <Compile Include="WebDriverTests\MiningSearchService.Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MockProxyTestBase.cs" />
+    <Compile Include="MockTestBase.cs" />
     <Compile Include="WebDriverTests\WebDriverService.Tests.cs" />
     <Compile Include="WebDriverTests\WebDriverTestsBase.cs" />
   </ItemGroup>
