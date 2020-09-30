@@ -32,7 +32,7 @@ namespace EDAutomate.Services
 
         private static void AutoUpdater_ApplicationExitEvent()
         {
-            MessageBox.Show(Constants.OnExitMessageBoxText, Constants.OnExitMessageBoxTitle , MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            MessageBox.Show(Constants.OnExitMessageBoxText, Constants.OnExitMessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             Application.OpenForms[Constants.VoiceAttackMainFormName].Close();
         }
     }
