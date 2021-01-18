@@ -4,7 +4,7 @@ namespace EDAutomate.Utilities
     {
         //Voice Attack Constants
 
-        public const string DisplayName = "Ed Automate Plugin - V0.0.0.13alpha";
+        public const string DisplayName = "Ed Automate Plugin - V0.0.0.14alpha";
 
         public const string DisplayInfo = "Ed Automate automates input on popular third party Elite Dangerous programs as well as some built in voice commands for OVR Drop";
 
@@ -43,6 +43,8 @@ namespace EDAutomate.Utilities
         public const string VoiceAttackBuyOrSellVariable = "buyorsell";
         public const string VoiceAttackMaterialTraderTypeVariable = "materialTraderVariable";
         public const string VoiceAttackMaterialTraderStation = "materialTraderStation";
+        public const string VoiceAttackMaterialStarSystem = "materialStarSystem";
+        
 
         //Voice Attack Context Constants
         public const string CommoditySearchContext = "commodity search";
