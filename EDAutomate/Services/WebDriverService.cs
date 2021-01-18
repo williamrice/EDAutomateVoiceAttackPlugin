@@ -7,6 +7,7 @@ using EDAutomate.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace EDAutomate.Services
@@ -197,6 +198,7 @@ namespace EDAutomate.Services
                     IWebElement clipBoard = null;
                     int lightSeconds = 0;
                     string stationName = string.Empty;
+                    string starSystem = string.Empty;
                     foreach (var result in results)
                     {
                         var data = result.FindElements(By.TagName("td"));
@@ -218,10 +220,23 @@ namespace EDAutomate.Services
                     if (match == null) return false;
                     var matchData = match.FindElements(By.TagName("td"));
                     var lineRight = match.FindElements(By.ClassName("lineright"));
+                    var pattern = @"(starsystem)";
+
                     foreach (var item in matchData)
                     {
+                        var links = item.FindElements(By.TagName("a"));
+                        foreach (var link in links)
+                        {
+                            if (Regex.Match(link.GetAttribute("href"), pattern, RegexOptions.IgnoreCase).Success)
+                            {
+                                starSystem = link.Text;
+                                break;
+                            }
+                        }
+
                         foreach (var i in lineRight)
                         {
+
                             var childen = i.FindElements(By.CssSelector("*"));
                             foreach (var c in childen)
                             {
@@ -230,6 +245,7 @@ namespace EDAutomate.Services
                                     clipBoard = c;
                                     goto FoundClipboard;
                                 }
+
                             }
                         }
 
@@ -244,6 +260,7 @@ namespace EDAutomate.Services
                         clipBoard.Click();
                     }
                     vaProxy.SetText(Constants.VoiceAttackMaterialTraderStation, stationName);
+                    vaProxy.SetText(Constants.VoiceAttackMaterialStarSystem, starSystem);
                 }
                 vaProxy.SetBoolean(Constants.VoiceAttackWebDriverSuccessVariable, true);
                 return true;
