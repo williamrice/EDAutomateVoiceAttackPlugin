@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <item>
-    <version>0.0.0.13</version>
-    <url>https://github.com/lawen4cer/EDAutomateVoiceAttackPlugin/releases/download/v0.0.0.13alpha/Ed.Automate0.0.0.13.zip</url>
-    <changelog>https://github.com/lawen4cer/EDAutomateVoiceAttackPlugin/releases/tag/v0.0.0.13alpha</changelog>
-    <mandatory>true</mandatory>
+    <version>0.0.0.14</version>
+    <url>https://github.com/lawen4cer/EDAutomateVoiceAttackPlugin/releases/download/v0.0.0.14alpha/Ed.Automate0.0.0.14.zip</url>
+    <changelog>https://github.com/lawen4cer/EDAutomateVoiceAttackPlugin/releases/tag/v0.0.0.14alpha</changelog>
+    <mandatory>false</mandatory>
 </item>
