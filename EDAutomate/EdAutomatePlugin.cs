@@ -77,6 +77,9 @@ namespace EDAutomate
                 case Constants.ShipSearchContext:
                     _ = webDriverService.OpenInara<Ships.Ship>(proxy, Constants.ShipModuleUrl, Constants.VoiceAttackShipVariable, JournalWatcherService.LastKnownSystem);
                     break;
+                case Constants.MaterialTraderSearchContext:
+                    _ = webDriverService.OpenInara<MaterialTraderTypes.MaterialTraderType>(proxy, Constants.GalaxyNearest, Constants.VoiceAttackMaterialTraderTypeVariable, JournalWatcherService.LastKnownSystem);
+                    break;
                 default:
                     break;
             }
