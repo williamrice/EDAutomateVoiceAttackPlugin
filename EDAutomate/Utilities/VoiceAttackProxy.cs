@@ -43,5 +43,7 @@ namespace EDAutomate.Utilities
         /// <param name="varname">The name of the variable that you want to set inside voice attack</param>
         /// <param name="b">The boolean value that you want to set the variable to</param>
         public virtual void SetBoolean(string varname, bool b) => _Proxy.SetBoolean(varname, b);
+
+        public virtual void SetText(string varname, string value) => _Proxy.SetText(varname, value);
     }
 }

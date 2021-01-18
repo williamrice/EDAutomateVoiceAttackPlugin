@@ -4,7 +4,7 @@ namespace EDAutomate.Utilities
     {
         //Voice Attack Constants
 
-        public const string DisplayName = "Ed Automate Plugin - V0.0.0.12alpha";
+        public const string DisplayName = "Ed Automate Plugin - V0.0.0.13alpha";
 
         public const string DisplayInfo = "Ed Automate automates input on popular third party Elite Dangerous programs as well as some built in voice commands for OVR Drop";
 
@@ -41,6 +41,8 @@ namespace EDAutomate.Utilities
         public const string VoiceAttackShipVariable = "shipVariable";
         public const string VoiceAttackMiningVariable = "miningVariable";
         public const string VoiceAttackBuyOrSellVariable = "buyorsell";
+        public const string VoiceAttackMaterialTraderTypeVariable = "materialTraderVariable";
+        public const string VoiceAttackMaterialTraderStation = "materialTraderStation";
 
         //Voice Attack Context Constants
         public const string CommoditySearchContext = "commodity search";
@@ -48,12 +50,14 @@ namespace EDAutomate.Utilities
         public const string ModuleSearchContext = "module search";
         public const string MiningSearchContext = "mining search";
         public const string ShipSearchContext = "ship search";
+        public const string MaterialTraderSearchContext = "material trader search";
 
         //URL Endpoint Constants
         public const string CommodityUrl = "https://inara.cz/galaxy-commodity/";
         public const string EngineerUrl = "https://inara.cz/galaxy-engineer/";
         public const string ShipModuleUrl = "https://inara.cz/galaxy-outfitting-stations/";
         public const string MiningSearchUrl = "https://edtools.cc/miner";
+        public const string GalaxyNearest = "https://inara.cz/galaxy-nearest/";
 
         //AutoUpdate Constants
         public const string EdAutomateAssemblyName = "EDAutomatePlugin";

@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\EDAutomateBuild\</OutputPath>
+    <OutputPath>E:\Steam\steamapps\common\VoiceAttack\Apps\Ed Automate\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\LogColor.cs" />
+    <Compile Include="Enums\MaterialTraderTypes.cs" />
     <Compile Include="Enums\Ships.cs" />
     <Compile Include="Services\AutoUpdateService.cs" />
     <Compile Include="Utilities\Constants.cs" />
